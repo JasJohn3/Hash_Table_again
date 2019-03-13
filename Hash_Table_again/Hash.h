@@ -34,11 +34,11 @@ template <typename K, typename V>
 class Hash_Table
 {
 private:
-	HashNode<K,V>** Table;
+	HashNode<K,V>* Table;
 public:
 	Hash_Table()
 	{
-		Table = new HashNode<K, V>**[TABLE_SIZE];
+		Table = new HashNode<K, V>*[TABLE_SIZE];
 		for (int i = 0; i < TABLE_SIZE; i++)
 			Table[i] = NULL;
 	}
@@ -46,7 +46,7 @@ public:
 	{
 		for (int i = 0; i < TABLE_SIZE; ++i)
 		{
-			HashNode<K, V>** entry = Table[i];
+			HashNode<K, V>* entry = Table[i];
 			while (entry != NULL)
 			{
 				HashNode<K, V>** prev = entry;
@@ -70,8 +70,8 @@ public:
 	void Insert(K key, V value)
 	{
 		int Hash_Index = HashFunc(key);
-		HashNode<K, V>** prev = NULL;
-		HashNode<K, V>** entry = Table[Hash_Index];
+		HashNode<K, V>* prev = NULL;
+		HashNode<K, V>* entry = Table[Hash_Index];
 		while (entry != NULL)
 		{
 			prev = entry;
@@ -100,8 +100,8 @@ public:
 	void Remove(int key)
 	{
 		int hash_val = HashFunc(key);
-		HashNode<K, V>** entry = Table[hash_val];
-		HashNode<K, V>** prev = NULL;
+		HashNode<K, V>* entry = Table[hash_val];
+		HashNode<K, V>* prev = NULL;
 		if (entry == NULL || entry->key != key)
 		{
 			std::cout << "No Element found at key " << key << endl;
@@ -126,7 +126,7 @@ public:
 	{
 		bool flag = false;
 		int hash_val = HashFunc(key);
-		HashNode<K, V>** entry = Table[hash_val];
+		HashNode<K, V> entry = Table[hash_val];
 		while (entry != NULL)
 		{
 			if (entry->key == key)
@@ -134,7 +134,7 @@ public:
 				cout << entry->value << " ";
 				flag = true;
 			}
-			entry = entry->next;
+			entry = entry.next;
 		}
 		if (!flag)
 			return;

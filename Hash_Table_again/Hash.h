@@ -137,7 +137,7 @@ public:
 			entry = entry->next;
 		}
 		if (!flag)
-			return -1;
+			return;
 	}
 };
 
